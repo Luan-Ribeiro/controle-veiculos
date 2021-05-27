@@ -1,8 +1,8 @@
 package com.controle.veiculos.response;
 
-public class VeiculoResponse {
+public class TabelaFipeResponse {
     private String nome;
-    private Long codigo;
+    private String codigo;
 
     public String getNome() {
         return nome;
@@ -12,11 +12,11 @@ public class VeiculoResponse {
         this.nome = nome;
     }
 
-    public Long getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Long codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 }

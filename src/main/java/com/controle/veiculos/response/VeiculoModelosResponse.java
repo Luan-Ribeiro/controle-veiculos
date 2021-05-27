@@ -1,22 +1,24 @@
 package com.controle.veiculos.response;
 
+import java.util.List;
+
 public class VeiculoModelosResponse {
-    private String nome;
-    private String codigo;
+    private List<VeiculoResponse> anos;
+    private List<VeiculoResponse> modelos;
 
-    public String getNome() {
-        return nome;
+    public List<VeiculoResponse> getAnos() {
+        return anos;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setAnos(List<VeiculoResponse> anos) {
+        this.anos = anos;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public List<VeiculoResponse> getModelos() {
+        return modelos;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setModelos(List<VeiculoResponse> modelos) {
+        this.modelos = modelos;
     }
 }

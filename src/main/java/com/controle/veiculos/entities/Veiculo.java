@@ -9,12 +9,13 @@ import javax.persistence.*;
 @Table(name = "veiculo")
 public class Veiculo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String marca;
     private String modelo;
-    private int ano;
+    private String ano;
+    private String valor;
 
-//    @JsonBackReference
     @ManyToOne
     @JsonIgnoreProperties("usuario")
     @JoinColumn(name = "usuario_id")
@@ -23,7 +24,7 @@ public class Veiculo {
     public Veiculo(){
     }
 
-    public Veiculo(Long id, String marca, String modelo, int ano, Usuario usuario) {
+    public Veiculo(Long id, String marca, String modelo, String ano, Usuario usuario) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
@@ -55,12 +56,20 @@ public class Veiculo {
         this.modelo = modelo;
     }
 
-    public int getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(int ano) {
+    public void setAno(String ano) {
         this.ano = ano;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 
     public Usuario getUsuario() {

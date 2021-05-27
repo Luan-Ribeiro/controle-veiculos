@@ -24,7 +24,7 @@ public class Usuario {
 //    @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
     @JsonIgnoreProperties("usuario")
-    private List<Veiculo> veiculos = new ArrayList<>();
+    private final List<Veiculo> veiculos = new ArrayList<>();
 
     public Usuario() {
     }

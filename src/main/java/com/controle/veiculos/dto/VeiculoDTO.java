@@ -3,38 +3,30 @@ package com.controle.veiculos.dto;
 import com.controle.veiculos.entities.Veiculo;
 
 public class VeiculoDTO {
-    private Long id;
     private String marca;
     private String modelo;
-    private int ano;
+    private String ano;
+    private String valor;
 
     private UsuarioDTO usuario;
 
     public  VeiculoDTO(){
     }
 
-    public VeiculoDTO(Long id, String marca, String modelo, int ano, UsuarioDTO usuario) {
-        this.id = id;
+    public VeiculoDTO(String marca, String modelo, String ano, String valor, UsuarioDTO usuario) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
+        this.valor = valor;
         this.usuario = usuario;
     }
 
     public VeiculoDTO(Veiculo entity){
-        id = entity.getId();
         marca = entity.getMarca();
         modelo = entity.getModelo();
         ano = entity.getAno();
+        valor = entity.getValor();
         usuario = new UsuarioDTO(entity.getUsuario());
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getMarca() {
@@ -53,12 +45,20 @@ public class VeiculoDTO {
         this.modelo = modelo;
     }
 
-    public int getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(int ano) {
+    public void setAno(String ano) {
         this.ano = ano;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 
     public UsuarioDTO getUsuario() {

@@ -1,5 +1,6 @@
 package com.controle.veiculos.controller;
 
+import com.controle.veiculos.dto.VeiculoDTO;
 import com.controle.veiculos.entities.Veiculo;
 import com.controle.veiculos.repositories.VeiculoRepository;
 import com.controle.veiculos.service.VeiculoService;
@@ -15,21 +16,17 @@ public class VeiculoController {
 
     @Autowired
     private VeiculoService service;
-    private VeiculoRepository repository;
-
-    VeiculoController(VeiculoRepository repository) {
-        this.repository = repository;
-    }
 
     @GetMapping
     public ResponseEntity<List<Veiculo>> findAll() {
-        List<Veiculo> list = repository.findAll();
+        List<Veiculo> list = service.getVeiculos();
         return ResponseEntity.ok(list);
     }
 
-@PostMapping(path = "/cadastro", consumes = "application/json", produces = "application/json")
-public ResponseEntity<Veiculo> adicionaVeiculo(@RequestBody Veiculo novoVeiculo) {
-    return ResponseEntity.ok(repository.save(novoVeiculo));
-}
+    @PostMapping(path = "/cadastro", consumes = "application/json", produces = "application/json")
+    public Veiculo adicionaVeiculo(@RequestBody VeiculoDTO novoVeiculo) {
+        Veiculo response = service.createVeiculo(novoVeiculo);
+        return response;
+    }
 
 }
