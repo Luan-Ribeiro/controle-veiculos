@@ -1,15 +1,15 @@
 package com.controle.veiculos.controller;
 
 import com.controle.veiculos.entities.Usuario;
+import com.controle.veiculos.exception.BusinessException;
 import com.controle.veiculos.repositories.UsuarioRepository;
 import com.controle.veiculos.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/usuario")
@@ -32,19 +32,12 @@ public class UsuarioController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<Usuario>> findById(@PathVariable("id") Long id) {
-        Optional<Usuario> byId = repository.findById(id);
-        return ResponseEntity.ok(byId);
+    public ResponseEntity<Usuario> findById(@PathVariable("id") int id) throws BusinessException {
+        return new ResponseEntity<Usuario>(service.findByAnoAndId(id), HttpStatus.OK);
     }
 
     @PostMapping(path = "/cadastro", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Usuario> criaUsuario(@RequestBody Usuario novoUsuario) {
-        return ResponseEntity.ok(repository.save(novoUsuario));
+    public ResponseEntity<Usuario> criaUsuario(@RequestBody Usuario novoUsuario) throws BusinessException {
+        return new ResponseEntity<Usuario>(service.createUsuario(novoUsuario), HttpStatus.CREATED);
     }
-//
-//    @GetMapping(value = "/sucess-by-seller")
-//    public ResponseEntity<List<SaleSucessDTO>> sucessGroupedBySeller() {
-//        List<SaleSucessDTO> list = service.sucessGroupedBySeller();
-//        return ResponseEntity.ok(list);
-//    }
 }

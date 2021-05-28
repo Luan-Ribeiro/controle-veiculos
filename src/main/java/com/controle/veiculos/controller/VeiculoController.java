@@ -2,7 +2,6 @@ package com.controle.veiculos.controller;
 
 import com.controle.veiculos.dto.VeiculoDTO;
 import com.controle.veiculos.entities.Veiculo;
-import com.controle.veiculos.repositories.VeiculoRepository;
 import com.controle.veiculos.service.VeiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +27,4 @@ public class VeiculoController {
         Veiculo response = service.createVeiculo(novoVeiculo);
         return response;
     }
-
 }

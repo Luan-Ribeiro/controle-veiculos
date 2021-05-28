@@ -18,13 +18,13 @@ public interface TabelaFipeClient {
     List<VeiculoResponse> getMarcas();
 
 
-    @RequestMapping(method = RequestMethod.GET,value = "/{idMarca}/modelos", consumes = "application/json")
+    @RequestMapping(method = RequestMethod.GET, value = "/{idMarca}/modelos", consumes = "application/json")
     VeiculoModelosResponse getModelos(@PathVariable("idMarca") String idMarca);
 
-    @RequestMapping(method = RequestMethod.GET,value = "/{idMarca}/modelos/{idModelo}/anos", consumes = "application/json")
-    List<VeiculoResponse> getAnos(@PathVariable("idMarca") String idMarca,@PathVariable("idModelo") String idModelo);
+    @RequestMapping(method = RequestMethod.GET, value = "/{idMarca}/modelos/{idModelo}/anos", consumes = "application/json")
+    List<VeiculoResponse> getAnos(@PathVariable("idMarca") String idMarca, @PathVariable("idModelo") String idModelo);
 
-    @RequestMapping(method = RequestMethod.GET,value = "/{idMarca}/modelos/{idModelo}/anos/{idAno}", consumes = "application/json")
-    HashMap<String,String> getValor(@PathVariable("idMarca") String idMarca, @PathVariable("idModelo") String idModelo, @PathVariable("idAno") String idAno);
+    @RequestMapping(method = RequestMethod.GET, value = "/{idMarca}/modelos/{idModelo}/anos/{idAno}", consumes = "application/json")
+    HashMap<String, String> getValor(@PathVariable("idMarca") String idMarca, @PathVariable("idModelo") String idModelo, @PathVariable("idAno") String idAno);
 
 }

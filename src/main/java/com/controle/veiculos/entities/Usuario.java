@@ -1,6 +1,5 @@
 package com.controle.veiculos.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -15,16 +14,16 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(unique = true)
     private String email;
-    @Column(unique=true)
+    @Column(name = "cpf", length = 11, unique = true)
     private String cpf;
-    @Column(name="data_nascimento")
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
-//    @JsonManagedReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
-    @JsonIgnoreProperties("usuario")
-    private final List<Veiculo> veiculos = new ArrayList<>();
+    private List<Veiculo> veiculos = new ArrayList<>();
 
     public Usuario() {
     }
@@ -79,5 +78,9 @@ public class Usuario {
 
     public List<Veiculo> getVeiculos() {
         return veiculos;
+    }
+
+    public void setVeiculos(List<Veiculo> veiculos) {
+        this.veiculos = veiculos;
     }
 }

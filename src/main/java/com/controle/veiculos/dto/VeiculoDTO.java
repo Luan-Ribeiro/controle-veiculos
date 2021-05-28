@@ -1,32 +1,39 @@
 package com.controle.veiculos.dto;
 
 import com.controle.veiculos.entities.Veiculo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(value = "usuario")
 public class VeiculoDTO {
     private String marca;
     private String modelo;
     private String ano;
     private String valor;
+    private String diaRodizio;
+    private Boolean rodizio;
 
-    private UsuarioDTO usuario;
+    private Long usuario_id;
 
-    public  VeiculoDTO(){
+    public VeiculoDTO() {
     }
 
-    public VeiculoDTO(String marca, String modelo, String ano, String valor, UsuarioDTO usuario) {
+    public VeiculoDTO(String marca, String modelo, String ano, String valor, String diaRodizio, Boolean rodizio, Long usuario_id) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
         this.valor = valor;
-        this.usuario = usuario;
+        this.diaRodizio = diaRodizio;
+        this.rodizio = rodizio;
+        this.usuario_id = usuario_id;
     }
 
-    public VeiculoDTO(Veiculo entity){
+    public VeiculoDTO(Veiculo entity) {
         marca = entity.getMarca();
         modelo = entity.getModelo();
         ano = entity.getAno();
         valor = entity.getValor();
-        usuario = new UsuarioDTO(entity.getUsuario());
+        rodizio = entity.getRodizio();
+        usuario_id = entity.getUsuario().getId();
     }
 
     public String getMarca() {
@@ -61,11 +68,23 @@ public class VeiculoDTO {
         this.valor = valor;
     }
 
-    public UsuarioDTO getUsuario() {
-        return usuario;
+    public String getDiaRodizio() { return diaRodizio; }
+
+    public void setDiaRodizio(String diaRodizio) { this.diaRodizio = diaRodizio; }
+
+    public Boolean getRodizio() {
+        return rodizio;
     }
 
-    public void setUsuario(UsuarioDTO usuario) {
-        this.usuario = usuario;
+    public void setRodizio(Boolean rodizio) {
+        this.rodizio = rodizio;
+    }
+
+    public Long getUsuario_id() {
+        return usuario_id;
+    }
+
+    public void setUsuario_id(Long usuario_id) {
+        this.usuario_id = usuario_id;
     }
 }

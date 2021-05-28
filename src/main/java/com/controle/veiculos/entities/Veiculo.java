@@ -1,7 +1,6 @@
 package com.controle.veiculos.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -15,20 +14,28 @@ public class Veiculo {
     private String modelo;
     private String ano;
     private String valor;
+    private String diaRodizio;
+    private Boolean rodizio;
 
+    @JsonBackReference
+    @JoinColumn(
+            name = "usuario_id",
+            referencedColumnName = "id"
+    )
     @ManyToOne
-    @JsonIgnoreProperties("usuario")
-    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    public Veiculo(){
+    public Veiculo() {
     }
 
-    public Veiculo(Long id, String marca, String modelo, String ano, Usuario usuario) {
+    public Veiculo(Long id, String marca, String modelo, String ano, String valor, String diaRodizio, Boolean rodizio, Usuario usuario) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
+        this.valor = valor;
+        this.diaRodizio = diaRodizio;
+        this.rodizio = rodizio;
         this.usuario = usuario;
     }
 
@@ -36,13 +43,9 @@ public class Veiculo {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
-    public String getMarca() {
-        return marca;
-    }
+    public String getMarca() { return marca; }
 
     public void setMarca(String marca) {
         this.marca = marca;
@@ -64,12 +67,20 @@ public class Veiculo {
         this.ano = ano;
     }
 
-    public String getValor() {
-        return valor;
-    }
+    public String getValor() { return valor; }
 
     public void setValor(String valor) {
         this.valor = valor;
+    }
+
+    public String getDiaRodizio() { return diaRodizio; }
+
+    public void setDiaRodizio(String diaRodizio) { this.diaRodizio = diaRodizio; }
+
+    public Boolean getRodizio() { return rodizio; }
+
+    public void setRodizio(Boolean rodizio) {
+        this.rodizio = rodizio;
     }
 
     public Usuario getUsuario() {
@@ -79,5 +90,4 @@ public class Veiculo {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
 }

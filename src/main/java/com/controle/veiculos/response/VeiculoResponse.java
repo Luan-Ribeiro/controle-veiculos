@@ -1,6 +1,6 @@
 package com.controle.veiculos.response;
 
-public class TabelaFipeResponse {
+public class VeiculoResponse {
     private String nome;
     private String codigo;
 
