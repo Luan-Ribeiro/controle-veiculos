@@ -29,7 +29,7 @@ public class UsuarioService {
         try {
             return repository.save(usuario);
         } catch (Throwable e) {
-            throw new BusinessException("Dados invalidos!Favor verificar");
+            throw new BusinessException("Dados invalidos! Favor verificar");
         }
     }
 

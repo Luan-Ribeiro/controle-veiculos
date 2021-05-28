@@ -4,10 +4,12 @@ import com.controle.veiculos.client.TabelaFipeClient;
 import com.controle.veiculos.dto.VeiculoDTO;
 import com.controle.veiculos.entities.Usuario;
 import com.controle.veiculos.entities.Veiculo;
+import com.controle.veiculos.exception.BusinessException;
 import com.controle.veiculos.repositories.VeiculoRepository;
 import com.controle.veiculos.response.VeiculoModelosResponse;
 import com.controle.veiculos.response.VeiculoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -23,20 +25,30 @@ public class VeiculoService {
     @Autowired
     TabelaFipeClient tabelaFipeClient;
 
-    public List<Veiculo> getVeiculos() { return repository.findAll(); }
+    public List<Veiculo> getVeiculos() {
+        return repository.findAll();
+    }
 
-    public Veiculo createVeiculo(VeiculoDTO novoVeiculo) {
-        HashMap<String, String> dadosVeiculo = capturaDadosFipe(novoVeiculo);
-        Veiculo veiculo = new Veiculo();
-        Usuario usuario = new Usuario();
-        usuario.setId(novoVeiculo.getUsuario_id());
-        veiculo.setMarca(dadosVeiculo.get("Marca"));
-        veiculo.setModelo(dadosVeiculo.get("Modelo"));
-        veiculo.setAno(dadosVeiculo.get("AnoModelo"));
-        veiculo.setValor(dadosVeiculo.get("Valor"));
-        veiculo.setUsuario(usuario);
-        repository.save(veiculo);
-        return veiculo;
+    public Veiculo createVeiculo(VeiculoDTO novoVeiculo) throws BusinessException {
+        try {
+            HashMap<String, String> dadosVeiculo = capturaDadosFipe(novoVeiculo);
+            Veiculo veiculo = new Veiculo();
+            Usuario usuario = new Usuario();
+            usuario.setId(novoVeiculo.getUsuario_id());
+            veiculo.setMarca(dadosVeiculo.get("Marca"));
+            veiculo.setModelo(dadosVeiculo.get("Modelo"));
+            veiculo.setAno(dadosVeiculo.get("AnoModelo"));
+            veiculo.setValor(dadosVeiculo.get("Valor"));
+            veiculo.setUsuario(usuario);
+            try {
+                repository.save(veiculo);
+            } catch (DataIntegrityViolationException ex) {
+                throw new BusinessException("Usuário não encontrado!");
+            }
+            return veiculo;
+        } catch (NullPointerException e) {
+            throw new BusinessException("Dados do Veiculo invalidos! Favor Verificar");
+        }
     }
 
     public HashMap<String, String> capturaDadosFipe(VeiculoDTO novoVeiculo) {
