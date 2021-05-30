@@ -39,7 +39,7 @@ public class VeiculoService {
             try {
                 repository.save(veiculo);
             } catch (DataIntegrityViolationException ex) {
-                throw new BusinessException("Usuário não encontrado!");
+                throw new DataIntegrityViolationException("Usuário não encontrado!");
             }
             return veiculo;
         } catch (NullPointerException e) {
