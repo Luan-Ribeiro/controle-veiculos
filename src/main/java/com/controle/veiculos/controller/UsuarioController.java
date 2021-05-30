@@ -18,19 +18,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioService service;
 
-    @Autowired
-    private UsuarioRepository repository;
-
-    UsuarioController(UsuarioRepository repository) {
-        this.repository = repository;
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Usuario>> findAll() {
-        List<Usuario> list = repository.findAll();
-        return ResponseEntity.ok(list);
-    }
-
     @GetMapping(path = "/{id}")
     public ResponseEntity<Usuario> findById(@PathVariable("id") int id) throws BusinessException {
         return new ResponseEntity<Usuario>(service.findByAnoAndId(id), HttpStatus.OK);

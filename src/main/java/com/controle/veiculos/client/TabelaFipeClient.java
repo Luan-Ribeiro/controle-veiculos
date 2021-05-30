@@ -17,7 +17,6 @@ public interface TabelaFipeClient {
     @RequestMapping(method = RequestMethod.GET, consumes = "application/json")
     List<VeiculoResponse> getMarcas();
 
-
     @RequestMapping(method = RequestMethod.GET, value = "/{idMarca}/modelos", consumes = "application/json")
     VeiculoModelosResponse getModelos(@PathVariable("idMarca") String idMarca);
 

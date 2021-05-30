@@ -25,10 +25,6 @@ public class VeiculoService {
     @Autowired
     TabelaFipeClient tabelaFipeClient;
 
-    public List<Veiculo> getVeiculos() {
-        return repository.findAll();
-    }
-
     public Veiculo createVeiculo(VeiculoDTO novoVeiculo) throws BusinessException {
         try {
             HashMap<String, String> dadosVeiculo = capturaDadosFipe(novoVeiculo);
@@ -66,8 +62,8 @@ public class VeiculoService {
                 List<VeiculoResponse> anos = tabelaFipeClient.getAnos(marca.get().getCodigo(), modelo.get().getCodigo());
                 Optional<VeiculoResponse> ano = anos.stream().filter(a -> a.getNome().equalsIgnoreCase(novoVeiculo.getAno())).findFirst();
                 if (ano.isPresent()) {
-                    HashMap<String, String> valor = tabelaFipeClient.getValor(marca.get().getCodigo(), modelo.get().getCodigo(), ano.get().getCodigo());
-                    return valor;
+                    HashMap<String, String> veiculo = tabelaFipeClient.getValor(marca.get().getCodigo(), modelo.get().getCodigo(), ano.get().getCodigo());
+                    return veiculo;
                 }
             }
         }
